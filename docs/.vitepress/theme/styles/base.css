@@ -95,3 +95,13 @@
   vertical-align: middle;
   cursor: default;
 }
+
+/* 搜索框宽度固定，不随「首页 / 内页」的布局伸缩。
+   内页要给侧边栏让出 padding-left，content 更窄，而搜索框是 flex-grow:1，
+   右端钉住、左端浮动，从首页进内页时它的左端会横向弹一下 */
+@media (min-width: 960px) {
+  .VPNavBarSearch {
+    flex-grow: 0;
+    width: 240px;
+  }
+}
