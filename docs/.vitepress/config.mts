@@ -175,13 +175,18 @@ export default defineConfig({
       {
         text: '基础',
         items: [
-          { text: 'Linux', link: '/linux/' },
-          { text: 'GitHub', link: '/github/' }
+          { text: 'GitHub', link: '/github/' },
+          { text: 'Linux', link: '/linux/' }
         ]
       },
-      { text: '起步', link: '/guide/' },
-      { text: '服务器', link: '/server/' },
-      { text: '智能体', link: '/agent/' },
+      {
+        text: '路线',
+        items: [
+          { text: 'Server', link: '/server/' },
+          { text: 'Agent', link: '/agent/' },
+          { text: 'Getting Started', link: '/guide/' }
+        ]
+      },
       { text: '实验室', link: '/lab/' },
       { text: '日志', link: '/log/' }
     ],
