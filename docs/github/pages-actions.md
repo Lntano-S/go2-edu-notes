@@ -57,6 +57,33 @@ jobs:
 
 一个容易绕晕的点：**仓库 Settings → Actions 里的默认权限，只对"没写 `permissions` 的 workflow"生效**。只要 workflow 自己声明了 `permissions`，就以它为准。所以仓库层保持"只读"是安全的，不用为了部署去放开。
 
+## base 前缀
+
+项目站点的地址里嵌着一段仓库名（`/go2-edu-notes/`），这一段就是 base。页面里的资源和链接都得带上它，否则会指到站外。
+
+VitePress 会**自动**补 base 的东西：
+
+- markdown 里的链接，比如 `[起步](/guide/)`
+- `config.mts` 里 `nav` / `sidebar` 的 `link`
+
+它**不会**自动补的：
+
+- Vue 模板里手写的 `<a href="/...">`
+
+手写的这类，得自己包一层 `withBase()`：
+
+```vue
+<script setup>
+import { withBase } from 'vitepress'
+</script>
+
+<a :href="withBase('/log/2026-09-26')">2026-09-26</a>
+```
+
+漏了会怎样：链接指向站点根下的路径，而那里不属于这个站。静态服务器兜底一下，就回到了首页，看起来像“点哪儿都跳首页”。
+
+怎么自查：打开构建产物，看 `href` 里有没有 `/go2-edu-notes/` 这段前缀。
+
 ## 常见失败
 
 | 现象 | 原因 |
