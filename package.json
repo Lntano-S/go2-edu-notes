@@ -1,0 +1,16 @@
+{
+  "name": "go2-edu-notes",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  },
+  "dependencies": {
+    "@nolebase/vitepress-plugin-git-changelog": "^2.18.2"
+  }
+}
