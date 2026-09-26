@@ -187,8 +187,8 @@ export default defineConfig({
           { text: 'Getting Started', link: '/guide/' }
         ]
       },
-      { text: '实验室', link: '/lab/' },
-      { text: '日志', link: '/log/' }
+      { text: 'Lab', link: '/lab/' },
+      { text: 'Log', link: '/log/' }
     ],
 
     sidebar: {
@@ -215,7 +215,7 @@ export default defineConfig({
       ],
       '/guide/': [
         {
-          text: '起步',
+          text: '起步 Getting Started',
           items: [
             { text: '总览', link: '/guide/' },
             { text: '安全规范', link: '/guide/safety' },
@@ -224,12 +224,12 @@ export default defineConfig({
           ]
         }
       ],
-      '/server/': [{ text: '服务器', items: [{ text: '总览', link: '/server/' }] }],
-      '/agent/': [{ text: '智能体', items: [{ text: '总览', link: '/agent/' }] }],
-      '/lab/': [{ text: '实验室', items: [{ text: '总览', link: '/lab/' }] }],
+      '/server/': [{ text: '服务器 Server', items: [{ text: '总览', link: '/server/' }] }],
+      '/agent/': [{ text: '智能体 Agent', items: [{ text: '总览', link: '/agent/' }] }],
+      '/lab/': [{ text: '实验室 Lab', items: [{ text: '总览', link: '/lab/' }] }],
       '/log/': [
         {
-          text: '日志',
+          text: '日志 Log',
           items: [
             { text: '总览', link: '/log/' },
             ...logPageItems(),
