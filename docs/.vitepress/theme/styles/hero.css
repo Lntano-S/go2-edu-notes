@@ -1,0 +1,93 @@
+/* 首页 hero：背景、logo 光晕、按钮 */
+
+/* 移动端首页：顶部导航栏透明，消掉白条闪烁 */
+@media (max-width: 959px) {
+  .VPHome .VPNavBar {
+    background-color: transparent !important;
+  }
+}
+
+/* logo 背后的光晕（变量渐变 + 大模糊）。等以后有 logo 了直接生效 */
+:root {
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    rgba(0, 114, 72, 0.35) 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(10, 138, 90, 0.35) 70%
+  );
+  --vp-home-hero-image-filter: blur(44px);
+}
+
+.dark:root {
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    rgba(0, 114, 72, 0.25) 30%,
+    rgba(10, 138, 90, 0.25) 50%,
+    rgba(90, 200, 150, 0.25) 75%
+  );
+}
+
+@media (min-width: 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(56px);
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(68px);
+  }
+}
+
+/* 背景：顶部淡绿光晕 */
+.VPHomeHero {
+  background:
+    radial-gradient(ellipse 85% 60% at 50% 0%, rgba(0, 114, 72, 0.12), transparent 65%),
+    radial-gradient(ellipse 65% 45% at 85% 20%, rgba(10, 138, 90, 0.05), transparent 70%);
+}
+
+@media (min-width: 960px) {
+  .VPHomeHero .image-container {
+    transform: translateY(-50px);
+  }
+}
+
+@media (max-width: 959px) {
+  .VPHero {
+    padding-top: calc(var(--vp-nav-height, 0px) + 130px) !important;
+  }
+
+  .VPHomeHero .heading {
+    gap: 10px;
+  }
+
+  .VPHomeHero .tagline {
+    padding-top: 14px;
+  }
+
+  .VPHomeHero .actions {
+    padding-top: 30px;
+  }
+}
+
+/* 主按钮：加大、民大绿、hover 上浮 */
+.VPHomeHero .VPButton {
+  font-size: 18px;
+  padding: 16px 40px;
+  border-radius: 10px;
+}
+
+.VPHomeHero .VPButton.brand {
+  background-color: #007248 !important;
+  border-color: #007248 !important;
+  transition:
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.VPHomeHero .VPButton.brand:hover {
+  background-color: #0a8a5a !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 114, 72, 0.3);
+}

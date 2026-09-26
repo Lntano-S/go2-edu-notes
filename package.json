@@ -11,6 +11,10 @@
     "vitepress": "^1.6.4"
   },
   "dependencies": {
-    "@nolebase/vitepress-plugin-git-changelog": "^2.18.2"
+    "@mdit/plugin-katex": "^1.1.0",
+    "@nolebase/vitepress-plugin-enhanced-readabilities": "^2.18.2",
+    "@nolebase/vitepress-plugin-git-changelog": "^2.18.2",
+    "@nolebase/vitepress-plugin-highlight-targeted-heading": "^2.18.2",
+    "katex": "^0.18.4"
   }
 }

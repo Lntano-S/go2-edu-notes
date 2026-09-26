@@ -1,5 +1,9 @@
 node_modules/
 docs/.vitepress/dist/
 docs/.vitepress/cache/
+
+# Obsidian 的工作区状态，不必进版本库
+.obsidian/
+
 .DS_Store
 *.log
