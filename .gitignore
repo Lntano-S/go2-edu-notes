@@ -7,3 +7,6 @@ docs/.vitepress/cache/
 
 .DS_Store
 *.log
+
+# 本地交接文件：只给下一个对话看，不发布、不上传
+HANDOFF.md
