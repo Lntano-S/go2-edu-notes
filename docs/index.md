@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Go2 EDU
   text: 学习笔记
-  tagline: 从环境到智能体，把宇树 Go2 EDU 的二次开发一路走通
+  tagline: 从命令行到智能体，把宇树 Go2 EDU 的二次开发一路走通
   actions:
     - theme: brand
       text: 从起步开始
@@ -14,6 +14,9 @@ hero:
       link: /log/
 
 features:
+  - title: Linux
+    details: 命令行、文件、权限、进程，打牢地基，也对齐三级 / 四级考纲。
+    link: /linux/
   - title: 起步
     details: 系统依赖、SDK 编译、只读示例，先让机器人听话地报出状态。
     link: /guide/

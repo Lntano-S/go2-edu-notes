@@ -153,6 +153,7 @@ export default defineConfig({
     },
 
     nav: [
+      { text: 'Linux', link: '/linux/' },
       { text: '起步', link: '/guide/' },
       { text: '服务器', link: '/server/' },
       { text: '智能体', link: '/agent/' },
@@ -161,6 +162,15 @@ export default defineConfig({
     ],
 
     sidebar: {
+      '/linux/': [
+        {
+          text: 'Linux 基础',
+          items: [
+            { text: '总览', link: '/linux/' },
+            { text: '命令的语法骨架', link: '/linux/command-syntax' }
+          ]
+        }
+      ],
       '/guide/': [
         {
           text: '起步',
