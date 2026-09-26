@@ -6,13 +6,14 @@
 
 <script setup>
 import { data as logs } from './logs.data'
+import { withBase } from 'vitepress'
 </script>
 
 <p v-if="!logs.length">还没有日记。</p>
 
 <ul v-else class="log-list">
   <li v-for="log in logs" :key="log.url" class="log-item">
-    <a class="log-date" :href="log.url">{{ log.date }}</a>
+    <a class="log-date" :href="withBase(log.url)">{{ log.date }}</a>
     <div class="log-title">{{ log.title }}</div>
     <div v-if="log.excerpt" class="log-excerpt">{{ log.excerpt }}</div>
   </li>
