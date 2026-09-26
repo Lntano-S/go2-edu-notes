@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { katex } from '@mdit/plugin-katex'
 import { GitChangelog } from '@nolebase/vitepress-plugin-git-changelog/vite'
 import { BASE, REPO_URL, SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from './site'
+import { taskList } from './taskList'
 
 // 扫一眼日志目录，按日期倒序列出来。写一篇，侧边栏自动多一条
 function logPageItems() {
@@ -68,6 +69,7 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(katex)
+      taskList(md)
     },
     image: {
       // 图片懒加载：滚动到才加载

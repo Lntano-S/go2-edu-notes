@@ -79,3 +79,19 @@
   overflow-y: hidden;
   padding: 4px 0;
 }
+
+/* markdown 任务列表：去掉列表圆点，复选框与文字对齐 */
+.vp-doc .contains-task-list {
+  list-style: none;
+  padding-left: 1.2em;
+}
+
+.vp-doc .task-list-item {
+  list-style: none;
+}
+
+.vp-doc .task-list-item-checkbox {
+  margin-right: 0.5em;
+  vertical-align: middle;
+  cursor: default;
+}
