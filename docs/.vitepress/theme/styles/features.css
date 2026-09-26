@@ -42,3 +42,14 @@
     transform: none;
   }
 }
+
+/* 五张卡片：排成 3 + 2，第二行居中，别退化成 4 + 1 */
+@media (min-width: 960px) {
+  .VPFeatures .items > .item.grid-4 {
+    width: calc(100% / 3);
+  }
+}
+
+.VPFeatures .items {
+  justify-content: center;
+}
