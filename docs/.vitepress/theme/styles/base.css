@@ -146,3 +146,18 @@
     background-color: var(--vp-sidebar-bg-color) !important;
   }
 }
+
+/* 导航站牌（点它回首页）：悬停亮成品牌绿；人在首页时常亮，
+   作为一种「当前就在这里」的标识 */
+.VPNavBarTitle .title {
+  transition: color 0.25s;
+}
+
+.VPNavBarTitle .title:hover {
+  color: var(--vp-c-brand-1);
+  opacity: 1;
+}
+
+.VPNavBar.home .VPNavBarTitle .title {
+  color: var(--vp-c-brand-1);
+}
