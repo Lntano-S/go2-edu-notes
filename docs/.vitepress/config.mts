@@ -173,14 +173,14 @@ export default defineConfig({
 
     nav: [
       {
-        text: '基础',
+        text: 'Basics',
         items: [
           { text: 'GitHub', link: '/github/' },
           { text: 'Linux', link: '/linux/' }
         ]
       },
       {
-        text: '路线',
+        text: 'Roadmap',
         items: [
           { text: 'Server', link: '/server/' },
           { text: 'Agent', link: '/agent/' },
