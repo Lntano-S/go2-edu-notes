@@ -153,7 +153,13 @@ export default defineConfig({
     },
 
     nav: [
-      { text: 'Linux', link: '/linux/' },
+      {
+        text: '基础',
+        items: [
+          { text: 'Linux', link: '/linux/' },
+          { text: 'GitHub', link: '/github/' }
+        ]
+      },
       { text: '起步', link: '/guide/' },
       { text: '服务器', link: '/server/' },
       { text: '智能体', link: '/agent/' },
@@ -162,6 +168,18 @@ export default defineConfig({
     ],
 
     sidebar: {
+      '/github/': [
+        {
+          text: 'GitHub 笔记',
+          items: [
+            { text: '总览', link: '/github/' },
+            { text: '仓库', link: '/github/repository' },
+            { text: '提交', link: '/github/commit' },
+            { text: '部署', link: '/github/pages-actions' },
+            { text: '认证', link: '/github/auth' }
+          ]
+        }
+      ],
       '/linux/': [
         {
           text: 'Linux 基础',
