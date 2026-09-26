@@ -96,12 +96,44 @@
   cursor: default;
 }
 
-/* 搜索框宽度固定，不随「首页 / 内页」的布局伸缩。
-   内页要给侧边栏让出 padding-left，content 更窄，而搜索框是 flex-grow:1，
-   右端钉住、左端浮动，从首页进内页时它的左端会横向弹一下 */
+/* 内容页的导航栏套用首页那套布阵：标题排回左侧、内容紧接其后。
+   两套布阵的终点一样、走法不同：首页靠外层留白，内页靠标题自身定位。
+   把内页也并入首页那套，标题和搜索框便自始至终不动。首页保持原样，一个字不改。
+   VitePress 的导航样式是 scoped 的，特异性更高，这里用 !important 压住 */
 @media (min-width: 960px) {
-  .VPNavBarSearch {
-    flex-grow: 0;
-    width: 240px;
+  .VPNavBar.has-sidebar .wrapper {
+    padding: 0 32px !important;
+  }
+
+  .VPNavBar.has-sidebar .container {
+    max-width: calc(var(--vp-layout-max-width) - 64px) !important;
+  }
+
+  .VPNavBar.has-sidebar .content {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .VPNavBar.has-sidebar .title {
+    position: static !important;
+    width: auto !important;
+    height: calc(var(--vp-nav-height) - 1px) !important;
+    padding: 0 !important;
+  }
+
+  .VPNavBar.has-sidebar .divider {
+    padding-left: 0 !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  .VPNavBar.has-sidebar .title {
+    padding-left: 0 !important;
+    width: auto !important;
+  }
+
+  .VPNavBar.has-sidebar .content {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
   }
 }
