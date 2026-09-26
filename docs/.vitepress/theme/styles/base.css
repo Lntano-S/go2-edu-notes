@@ -137,3 +137,12 @@
     padding-left: 0 !important;
   }
 }
+
+/* 内容页：顶栏与左侧栏用同一条底色，去掉「顶上一白、左下一灰」的割裂。
+   顶栏整体铺灰，右侧内容区保持原色，左侧从上到下连成一条 */
+@media (min-width: 960px) {
+  .VPNavBar.has-sidebar,
+  .VPNavBar.has-sidebar .content-body {
+    background-color: var(--vp-sidebar-bg-color) !important;
+  }
+}
