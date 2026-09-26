@@ -1,9 +1,26 @@
 import { defineConfig } from 'vitepress'
 import fs from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { katex } from '@mdit/plugin-katex'
 import { GitChangelog } from '@nolebase/vitepress-plugin-git-changelog/vite'
 import { BASE, REPO_URL, SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from './site'
+
+// 扫一眼日志目录，按日期倒序列出来。写一篇，侧边栏自动多一条
+function logPageItems() {
+  const dir = fileURLToPath(new URL('../log', import.meta.url))
+  try {
+    return fs
+      .readdirSync(dir)
+      .filter((f) => /^\d{4}[-.]\d{2}[-.]\d{2}\.md$/.test(f))
+      .map((f) => f.replace(/\.md$/, ''))
+      .sort()
+      .reverse()
+      .map((d) => ({ text: d, link: `/log/${d}` }))
+  } catch {
+    return []
+  }
+}
 
 // 构建时静态统计每页字数，注入 pageData.stats，运行时直接读，不用等页面渲染再算
 function countWords(pageData: { filePath?: string }): number {
@@ -208,6 +225,7 @@ export default defineConfig({
           text: '日志',
           items: [
             { text: '总览', link: '/log/' },
+            ...logPageItems(),
             { text: '单篇模板', link: '/log/template' }
           ]
         }
