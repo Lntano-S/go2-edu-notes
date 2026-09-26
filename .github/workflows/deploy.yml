@@ -21,22 +21,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          # 完整 git 历史：页面历史插件需要（浅克隆拿不到全部提交）
           fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # 与本地 .nvmrc 保持一致；KaTeX 的 markdown 插件要求 Node >= 22
+          node-version: 24
           cache: npm
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build site
         run: npm run docs:build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
