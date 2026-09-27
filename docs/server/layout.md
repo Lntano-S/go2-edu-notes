@@ -74,6 +74,42 @@ source ~/.bashrc
 which llama      # → /home/shutianyu/scripts/llama
 ```
 
+### `~/scripts/health`
+机器体检：一次看完**端口占用 + 显存 + llama 进程**。共用机器上最该盯的三样。
+
+关注的端口列在脚本开头的 `PORTS` 一行，加新服务只改这行。
+
+```bash
+health
+```
+
+## 编辑文件：nano 速查
+
+服务器上改文件用 `nano`。打开（不存在就新建）：
+
+```bash
+nano ~/scripts/health
+```
+
+**底部两行就是它的全部说明书**，`^` 代表 `Ctrl`。
+
+**核心三步**：写完 → `Ctrl + O` → 回车（保存）→ `Ctrl + X`（退出）。
+
+| 键 | 作用 |
+|---|---|
+| `Ctrl + O` | 保存（Write Out），再回车确认 |
+| `Ctrl + X` | 退出 |
+| `Ctrl + W` | 搜索 |
+| `Ctrl + K` | 剪切整行 |
+| `Ctrl + U` | 粘贴刚剪的行 |
+| `Ctrl + G` | 帮助 |
+| `Ctrl + C` | 显示光标位置（**不是退出**） |
+
+**两个坑**：
+
+- 在 nano 里按 `Ctrl + V` 是“翻下一页”，**粘贴要用终端自己的快捷键**（Termius 里一般是 `Ctrl + Shift + V` 或右键）。
+- 退出永远是 `Ctrl + X`，不是 `Ctrl + C`。改错了不想保存：`Ctrl + X` → 按 `N`。
+
 ## 运维速查
 
 有脚本的话，直接用 [llama](#scriptsllama) 那五个子命令最省事。裸命令在下面，知道底层发生了什么：
@@ -81,7 +117,7 @@ which llama      # → /home/shutianyu/scripts/llama
 ```bash
 pkill llama-server                                     # 停
 pgrep -af llama-server                                 # 看活没
-curl -s http://127.0.0.1:8080/v1/models | head -c 80   # 端点通不通
+curl -s http://127.0.0.1:<port>/v1/models | head -c 80   # 端点通不通
 tail -f ~/logs/llama-server.log                        # 盯日志
 ```
 
