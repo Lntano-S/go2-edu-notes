@@ -224,7 +224,15 @@ export default defineConfig({
           ]
         }
       ],
-      '/server/': [{ text: '服务器 Server', items: [{ text: '总览', link: '/server/' }] }],
+      '/server/': [
+        {
+          text: '服务器 Server',
+          items: [
+            { text: '总览', link: '/server/' },
+            { text: 'llama.cpp 部署与验证', link: '/server/llama-cpp' }
+          ]
+        }
+      ],
       '/agent/': [{ text: '智能体 Agent', items: [{ text: '总览', link: '/agent/' }] }],
       '/lab/': [{ text: '实验室 Lab', items: [{ text: '总览', link: '/lab/' }] }],
       '/log/': [
