@@ -229,7 +229,8 @@ export default defineConfig({
           text: '服务器 Server',
           items: [
             { text: '总览', link: '/server/' },
-            { text: 'llama.cpp 部署与验证', link: '/server/llama-cpp' }
+            { text: 'llama.cpp 部署与验证', link: '/server/llama-cpp' },
+            { text: '目录与脚本', link: '/server/layout' }
           ]
         }
       ],
