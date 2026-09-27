@@ -11,8 +11,8 @@
 ├── logs/                      运行日志
 │   ├── llama-server.log
 │   └── build.log
-└── scripts/                   可复用小脚本
-    └── llama.sh
+└── scripts/                   可复用小脚本（已加进 PATH）
+    └── llama                  llama-server 起停
 ```
 
 ## 每样东西放哪、为什么
@@ -44,18 +44,39 @@ llama.cpp 源码 + 编译产物。快照 commit `81bc6b8`（tag b11200）。
 - **`llama-server.log`**：服务的全部输出——启动信息、报错、崩溃现场。出问题第一个看它。
 - `build.log`：编译时的输出。
 
-### `~/scripts/llama.sh`
-起停脚本，五个子命令：
+### `~/scripts/llama`
+llama-server 的起停脚本，五个子命令：
 
 ```bash
-~/scripts/llama.sh start     # 起服务
-~/scripts/llama.sh stop      # 停服务
-~/scripts/llama.sh restart   # 重启
-~/scripts/llama.sh status    # 看活着没
-~/scripts/llama.sh log       # 盯日志
+llama start     # 起服务
+llama stop      # 停服务
+llama restart   # 重启
+llama status    # 看活着没
+llama log       # 盯日志
+```
+
+**为什么能直接敲**：`~/scripts` 已加进 `PATH`，不用写全路径。
+
+#### 让脚本变成命令（PATH）
+
+```bash
+echo 'export PATH="$PATH:$HOME/scripts"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+加进 PATH 时**放末尾，别放最前**。PATH 从左往右找，谁在前谁优先：放前面会盖掉同名的系统命令，放末尾则只有系统里找不到时才轮到它。注意 `~/.bashrc` 的改动只对**新开的 shell** 生效，`source` 一下当前这个才立刻生效。
+
+> PATH 就是一串目录，按顺序去里面找命令。之前 `nvcc` 找不到，就是因为 `/usr/local/cuda/bin` 不在这串里。
+
+验证：
+
+```bash
+which llama      # → /home/shutianyu/scripts/llama
 ```
 
 ## 运维速查
+
+有脚本的话，直接用 [llama](#scriptsllama) 那五个子命令最省事。裸命令在下面，知道底层发生了什么：
 
 ```bash
 pkill llama-server                                     # 停
