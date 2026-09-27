@@ -14,8 +14,8 @@
 
 ## 为什么不用现成的 ollama
 
-服务器上原本就有 ollama（跑在 `127.0.0.1:11435`）。它底层也是 llama.cpp 一系，但多包了一层。
+服务器上原本就有 ollama（跑在 `127.0.0.1`，它自己的端口上）。它底层也是 llama.cpp 一系，但多包了一层。
 
-阶段②要手写 Agent、直接对上 function calling，需要把工具调用的模板（`--jinja`）攥在自己手里。所以单独编译一份 llama.cpp，端口错开 11435。
+阶段②要手写 Agent、直接对上 function calling，需要把工具调用的模板（`--jinja`）攥在自己手里。所以单独编译一份 llama.cpp，端口避开 ollama 那个。
 
 用 ollama 不算错，只是在这个场景里，那层封装帮不上忙。
