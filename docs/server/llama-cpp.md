@@ -33,7 +33,7 @@
 | CUDA | 13.0.88，在 `/usr/local/cuda/bin`（**不在 PATH**） |
 | 磁盘 | `/` 233 G，余 163 G |
 | 模型 | `/srv/models/Qwen3.8-27B/Qwen3.8-27B-UD-IQ4_XS.gguf`，13.3 GiB |
-| 已有服务 | ollama 跑在 `127.0.0.1:11435` |
+| 已有服务 | ollama（跑在它自己的端口上） |
 
 模型自报的身份：**27.3B 参数**，量化 `IQ4_XS - 4.25 bpw`，词表 248,320，
 原生上下文 **262,144（256K）**，带着额外的 MTP 层（llama.cpp 不启用，忽略）。
@@ -90,7 +90,7 @@ mkdir -p ~/logs
 
 nohup ./build/bin/llama-server \
   -m /srv/models/Qwen3.8-27B/Qwen3.8-27B-UD-IQ4_XS.gguf \
-  -c 16384 -ngl 99 --host 127.0.0.1 --port 8080 --jinja \
+  -c 16384 -ngl 99 --host 127.0.0.1 --port <port> --jinja \
   > ~/logs/llama-server.log 2>&1 &
 
 tail -f ~/logs/llama-server.log
@@ -102,10 +102,10 @@ tail -f ~/logs/llama-server.log
 | `-c 16384` | 上下文长度。显存有余可往上加（原生支持 256K） |
 | `-ngl 99` | 所有层放 GPU |
 | `--host 127.0.0.1` | 只监听本机（外部访问要用端口转发） |
-| `--port 8080` | 避开 ollama 的 11435 |
+| `--port <port>` | 避开 ollama 占用的端口 |
 | `--jinja` | 用模型自带的 chat template，**function calling 的关键** |
 
-日志里出现 `listening on http://127.0.0.1:8080` 就算起来了。加载 13.3 GiB 权重约需 13 秒。
+日志里出现 `listening on http://127.0.0.1:<port>` 就算起来了。加载 13.3 GiB 权重约需 13 秒。
 
 > `unused tensor blk.64.*` 那批警告无害——模型带了额外的 MTP 层，llama.cpp 用不上，忽略。
 
@@ -113,15 +113,15 @@ tail -f ~/logs/llama-server.log
 
 ```bash
 # 1) 模型列表
-curl -s http://127.0.0.1:8080/v1/models
+curl -s http://127.0.0.1:<port>/v1/models
 
 # 2) 会不会说话
-curl -s http://127.0.0.1:8080/v1/chat/completions \
+curl -s http://127.0.0.1:<port>/v1/chat/completions \
   -H 'Content-Type: application/json' \
   -d '{"messages":[{"role":"user","content":"用一句话说明你是谁"}],"max_tokens":64}'
 
 # 3) 会不会伸手要工具（关键）
-curl -s http://127.0.0.1:8080/v1/chat/completions \
+curl -s http://127.0.0.1:<port>/v1/chat/completions \
   -H 'Content-Type: application/json' \
   -d '{"messages":[{"role":"user","content":"北京现在几点？"}],"tools":[{"type":"function","function":{"name":"get_time","description":"查询指定城市的当前时间","parameters":{"type":"object","properties":{"city":{"type":"string"}},"required":["city"]}}}],"tool_choice":"auto","max_tokens":128}'
 ```
