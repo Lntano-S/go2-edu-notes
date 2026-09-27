@@ -26,7 +26,7 @@
 
 | 项 | 值 |
 |---|---|
-| 地址 | `<host>:<port>`（SSH） |
+| 接入 | SSH，`<host>:<port>`（真实地址另存本地，**不进仓库**） |
 | 系统 | Ubuntu 24.04.5 LTS，x86_64 |
 | CPU / 内存 | 28 核 / 31 GiB |
 | GPU | RTX 3080 20 GB，驱动 580.178.04 |
@@ -42,13 +42,17 @@
 
 ### 一、拿源码
 
-服务器直连 GitHub 会超时（`http_code=000`），走镜像：
+GitHub 的连通**时好时坏**——同一个地址，`curl` 测会超时（`http_code=000`），`git ls-remote` 却能拿到 ref。所以先直连试一次，不通再换镜像：
 
 ```bash
+# 先试直连
+git clone --depth 1 https://github.com/ggml-org/llama.cpp ~/projects/llama.cpp
+
+# 不行再换镜像
 git clone --depth 1 https://gitclone.com/github.com/ggml-org/llama.cpp ~/projects/llama.cpp
 ```
 
-也可以用 SSH 端口转发或代理。当前快照：commit `81bc6b8`，tag **b11200**。
+当前快照：commit `81bc6b8`，tag **b11200**。
 
 ### 二、编译
 
@@ -142,8 +146,8 @@ nvidia-smi --query-gpu=memory.used --format=csv   # 显存回落 = 真释放
 
 | 坑 | 现象 | 解法 |
 |---|---|---|
-| GitHub 直连不通 | `curl github.com` 20 秒超时、`http_code=000` | 用 `gitclone.com` 镜像，或 SSH 端口转发 |
-| 只有 GitHub 不通 | 清华/阿里/gitee/pypi 都通 | 确认是单点问题，不是全断网 |
+| GitHub 连通不稳 | `curl` 20 秒超时（`http_code=000`），但 `git ls-remote` 却能通 | 先试直连，失败再换 `gitclone.com` 镜像 |
+| 别把一次超时当结论 | 清华 / gitee / pypi 都稳定，只有 GitHub 抖 | `curl` 和 `git` 的结果可能不一致，换一种方式再测一次 |
 | `src refspec main does not match any` | 本地分支叫 `master` | `git branch -m main` |
 | 只读 `.git` | 沙盒挂载，能改文件不能提交 | 在终端手动提交 |
 | `nvcc` 找不到 | CUDA 不在 PATH | 编译时显式传 `CMAKE_CUDA_COMPILER` |
