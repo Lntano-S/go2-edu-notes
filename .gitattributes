@@ -1,0 +1,21 @@
+# 双系统（Linux / Windows）共享工作台，统一换行符为 LF。
+# 不这么做，两个系统会互相认为对方改了文件，git status 永远脏。
+* text=auto eol=lf
+
+# 以下一律保持二进制原样，绝不做换行符转换。
+# 字体、图片被当文本转换一次就永久损坏。
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.otf  binary
+*.eot  binary
+
+# 明确标记为二进制，避免 diff / merge 时误判。
+*.pdf binary
+*.zip binary
